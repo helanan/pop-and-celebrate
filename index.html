@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pop & Celebrate — Party Planning Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF1F8E;
+    --yellow: #FFE600;
+    --cyan: #00D4FF;
+    --lime: #7DFF4F;
+    --coral: #FF6B35;
+    --purple: #A855F7;
+    --navy: #0D0D2B;
+    --white: #FFFEF5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── CONFETTI CANVAS ── */
+  #confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: var(--navy);
+    border-bottom: 4px solid var(--yellow);
+  }
+  .logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: var(--yellow);
+    letter-spacing: 1px;
+  }
+  .logo span { color: var(--pink); }
+  nav ul { display: flex; gap: 32px; list-style: none; }
+  nav ul li a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--yellow); }
+  .nav-cta {
+    background: var(--pink);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 50px;
+    transition: background 0.2s, transform 0.2s !important;
+    border: 3px solid var(--white);
+  }
+  .nav-cta:hover { background: var(--yellow) !important; color: var(--navy) !important; transform: scale(1.05) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    overflow: hidden;
+    padding: 120px 60px 60px;
+  }
+  .hero-bg-shapes {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+  }
+  .blob-1 { width: 500px; height: 500px; background: var(--pink); top: -100px; right: -100px; animation: blobFloat 8s ease-in-out infinite; }
+  .blob-2 { width: 350px; height: 350px; background: var(--cyan); bottom: -50px; left: -80px; animation: blobFloat 10s ease-in-out infinite reverse; }
+  .blob-3 { width: 280px; height: 280px; background: var(--yellow); top: 40%; left: 30%; animation: blobFloat 12s ease-in-out infinite; }
+
+  @keyframes blobFloat {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-20px) scale(1.05); }
+    66% { transform: translate(-15px,25px) scale(0.95); }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+  }
+  .hero-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 24px;
+    animation: slideUp 0.7s ease 0.4s both;
+  }
+  .hero-title .accent-pink { color: var(--pink); }
+  .hero-title .accent-yellow { color: var(--yellow); }
+  .hero-sub {
+    font-size: 1.2rem;
+    color: rgba(255,254,245,0.8);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 500px;
+    animation: slideUp 0.7s ease 0.6s both;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: slideUp 0.7s ease 0.8s both; }
+  .btn-primary {
+    background: var(--pink);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 16px 36px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    border: 3px solid var(--pink);
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 6px 6px 0 var(--yellow);
+  }
+  .btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--yellow); }
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 16px 36px;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  .hero-img {
+    position: absolute;
+    right: 5%;
+    bottom: 0;
+    font-size: 16rem;
+    line-height: 1;
+    z-index: 2;
+    animation: float 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 60px rgba(255,31,142,0.4));
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-20px) rotate(3deg); }
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 50px;
+    right: 5%;
+    display: flex;
+    gap: 32px;
+    z-index: 3;
+    animation: slideUp 0.7s ease 1s both;
+  }
+  .stat-box {
+    background: rgba(255,254,245,0.08);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 16px 24px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--yellow);
+    display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(255,254,245,0.6); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-bar {
+    background: var(--yellow);
+    padding: 14px 0;
+    overflow: hidden;
+    border-top: 4px solid var(--navy);
+    border-bottom: 4px solid var(--navy);
+    position: relative; z-index: 2;
+  }
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-item {
+    font-family: 'Boogaloo', cursive;
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-right: 60px;
+  }
+  .marquee-item span { margin-right: 20px; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { position: relative; z-index: 1; }
+  .section-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+    max-width: 520px;
+  }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 100px 60px;
+    background: var(--white);
+  }
+  .services-header { text-align: center; margin-bottom: 64px; }
+  .services-header .section-label { color: var(--pink); }
+  .services-header .section-sub { margin: 0 auto; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: white;
+    border: 3px solid var(--navy);
+    border-radius: 24px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
+    cursor: default;
+    box-shadow: 6px 6px 0 var(--navy);
+  }
+  .service-card:hover { transform: translate(-4px,-4px); box-shadow: 10px 10px 0 var(--navy); }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+  }
+  .card-pink::before { background: var(--pink); }
+  .card-yellow::before { background: var(--yellow); }
+  .card-cyan::before { background: var(--cyan); }
+  .card-lime::before { background: var(--lime); }
+  .card-coral::before { background: var(--coral); }
+  .card-purple::before { background: var(--purple); }
+
+  .service-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+  .service-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--navy);
+  }
+  .service-desc { font-size: 0.95rem; line-height: 1.6; color: #555; }
+  .service-tag {
+    display: inline-block;
+    margin-top: 16px;
+    background: var(--navy);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  #process {
+    padding: 100px 60px;
+    background: var(--navy);
+    overflow: hidden;
+  }
+  #process .section-label { color: var(--cyan); }
+  #process .section-title { color: var(--white); }
+  #process .section-sub { color: rgba(255,254,245,0.65); }
+  .process-header { margin-bottom: 64px; }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    position: relative;
+  }
+  .step {
+    position: relative;
+    padding: 36px 32px;
+    border-radius: 24px;
+    border: 2px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .step:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.25); }
+  .step-number {
+    font-family: 'Fredoka One', cursive;
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .s1 .step-number { color: var(--pink); }
+  .s2 .step-number { color: var(--yellow); }
+  .s3 .step-number { color: var(--cyan); }
+  .s4 .step-number { color: var(--lime); }
+  .step-title { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: white; margin-bottom: 10px; }
+  .step-desc { font-size: 0.95rem; color: rgba(255,254,245,0.65); line-height: 1.6; }
+
+  /* ── THEMES ── */
+  #themes {
+    padding: 100px 60px;
+    background: #FFF8F0;
+  }
+  .themes-header { text-align: center; margin-bottom: 64px; }
+  .themes-header .section-label { color: var(--coral); }
+  .themes-header .section-sub { margin: 0 auto; }
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .theme-card {
+    border-radius: 20px;
+    padding: 40px 20px;
+    text-align: center;
+    border: 3px solid var(--navy);
+    cursor: default;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 5px 5px 0 var(--navy);
+  }
+  .theme-card:hover { transform: translate(-3px,-3px) rotate(-1deg); }
+  .theme-emoji { font-size: 3rem; display: block; margin-bottom: 12px; }
+  .theme-name { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: var(--navy); }
+  .t1 { background: #FFE0F0; }
+  .t2 { background: #FFF3C0; }
+  .t3 { background: #C0F0FF; }
+  .t4 { background: #DDFFC0; }
+  .t5 { background: #FFE0D0; }
+  .t6 { background: #E8D5FF; }
+  .t7 { background: #FFD0D0; }
+  .t8 { background: #D0FFE8; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials {
+    padding: 100px 60px;
+    background: var(--white);
+  }
+  .testimonials-header { text-align: center; margin-bottom: 64px; }
+  .testimonials-header .section-label { color: var(--purple); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .testi-card {
+    background: white;
+    border: 3px solid var(--navy);
+    border-radius: 24px;
+    padding: 36px;
+    position: relative;
+    box-shadow: 5px 5px 0 var(--navy);
+    transition: transform 0.2s;
+  }
+  .testi-card:hover { transform: translate(-2px,-2px); }
+  .testi-quote {
+    font-size: 3rem;
+    line-height: 1;
+    font-family: 'Fredoka One', cursive;
+    margin-bottom: 16px;
+  }
+  .tq-pink { color: var(--pink); }
+  .tq-yellow { color: var(--yellow); }
+  .tq-cyan { color: var(--cyan); }
+  .testi-text { font-size: 1rem; line-height: 1.7; color: #444; margin-bottom: 24px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--navy);
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 800; font-size: 0.9rem; }
+  .testi-event { font-size: 0.8rem; color: #888; }
+  .stars { color: var(--yellow); margin-bottom: 12px; font-size: 1rem; letter-spacing: 2px; }
+
+  /* ── CTA ── */
+  #cta {
+    padding: 100px 60px;
+    background: var(--pink);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(0,0,0,0.04) 20px,
+      rgba(0,0,0,0.04) 40px
+    );
+  }
+  #cta .section-title { color: white; font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; position: relative; }
+  #cta p { color: rgba(255,255,255,0.85); font-size: 1.15rem; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; position: relative; }
+  .cta-btn {
+    background: var(--navy);
+    color: var(--yellow);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 18px 48px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+    position: relative;
+  }
+  .cta-btn:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 rgba(0,0,0,0.25); }
+  .cta-emojis {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 24px;
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,254,245,0.6);
+    text-align: center;
+    padding: 40px 60px;
+    border-top: 4px solid var(--yellow);
+  }
+  .footer-logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--yellow);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .footer-logo span { color: var(--pink); }
+  footer p { font-size: 0.88rem; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    #hero { padding: 100px 24px 200px; }
+    .hero-img { font-size: 8rem; right: 10px; }
+    .hero-stats { left: 24px; right: 24px; bottom: 20px; }
+    #services, #process, #themes, #testimonials, #cta { padding: 60px 24px; }
+    footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Pop<span>&</span>Celebrate</div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#themes">Themes</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#cta" class="nav-cta">Book Now 🎉</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-shapes">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">✨ Your Party, Our Obsession</div>
+    <h1 class="hero-title">
+      Let's Make Your<br>
+      Party <span class="accent-pink">Absolutely</span><br>
+      <span class="accent-yellow">Unforgettable.</span>
+    </h1>
+    <p class="hero-sub">From intimate birthdays to epic celebrations — we handle every detail so you can focus on having the time of your life.</p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-primary">Book a Free Consult 🎊</a>
+      <a href="#services" class="btn-secondary">See What We Do →</a>
+    </div>
+  </div>
+  <div class="hero-img">🎉</div>
+  <div class="hero-stats">
+    <div class="stat-box">
+      <span class="stat-num">500+</span>
+      <span class="stat-label">Parties Thrown</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">98%</span>
+      <span class="stat-label">Happy Clients</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">7★</span>
+      <span class="stat-label">Avg Rating</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track" id="marquee-track"></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <span class="section-label">✦ What We Do</span>
+    <h2 class="section-title">Every Party. Every Occasion.</h2>
+    <p class="section-sub">No party too big, no detail too small. We've got you covered from balloons to bonbons.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card card-pink">
+      <span class="service-emoji">🎂</span>
+      <div class="service-name">Birthdays</div>
+      <p class="service-desc">From toddler tantrums to milestone 50ths — we create the birthday bash of your dreams.</p>
+      <span class="service-tag">Ages 1–100+</span>
+    </div>
+    <div class="service-card card-yellow">
+      <span class="service-emoji">💍</span>
+      <div class="service-name">Engagement Parties</div>
+      <p class="service-desc">Pop the champagne! Celebrate love with a gorgeous gathering your guests will rave about.</p>
+      <span class="service-tag">Romantic & Fun</span>
+    </div>
+    <div class="service-card card-cyan">
+      <span class="service-emoji">🎓</span>
+      <div class="service-name">Graduation Parties</div>
+      <p class="service-desc">Celebrate the big achievement in style — caps, gowns, and a whole lot of fun.</p>
+      <span class="service-tag">Cap & Gown Ready</span>
+    </div>
+    <div class="service-card card-lime">
+      <span class="service-emoji">🏢</span>
+      <div class="service-name">Corporate Events</div>
+      <p class="service-desc">Team building, holiday parties, and product launches that actually get people excited.</p>
+      <span class="service-tag">Office-Approved</span>
+    </div>
+    <div class="service-card card-coral">
+      <span class="service-emoji">🍼</span>
+      <div class="service-name">Baby Showers</div>
+      <p class="service-desc">Sweet, stylish, and full of love — because the new arrival deserves the best welcome.</p>
+      <span class="service-tag">Sprinkle or Full</span>
+    </div>
+    <div class="service-card card-purple">
+      <span class="service-emoji">🎃</span>
+      <div class="service-name">Holiday & Themed</div>
+      <p class="service-desc">Halloween bashes, Christmas extravaganzas, and every wild themed party in between.</p>
+      <span class="service-tag">Any Season</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-header">
+    <span class="section-label">✦ How It Works</span>
+    <h2 class="section-title">Easy as 1, 2, 3... 4!</h2>
+    <p class="section-sub">We make planning effortless. Here's how we go from idea to celebration.</p>
+  </div>
+  <div class="steps">
+    <div class="step s1">
+      <span class="step-number">01</span>
+      <div class="step-title">Tell Us Your Dream</div>
+      <p class="step-desc">Book a free consult and spill all your party ideas — the wilder, the better. We love a challenge.</p>
+    </div>
+    <div class="step s2">
+      <span class="step-number">02</span>
+      <div class="step-title">We Build the Plan</div>
+      <p class="step-desc">Our team crafts a custom proposal with theme, vendors, timeline, and full budget breakdown.</p>
+    </div>
+    <div class="step s3">
+      <span class="step-number">03</span>
+      <div class="step-title">We Handle Everything</div>
+      <p class="step-desc">From florals to DJs to catering — we coordinate every vendor and detail, stress-free.</p>
+    </div>
+    <div class="step s4">
+      <span class="step-number">04</span>
+      <div class="step-title">You Party Hard</div>
+      <p class="step-desc">Show up, enjoy every moment, and leave the breakdown to us. Your only job is having fun.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section id="themes">
+  <div class="themes-header">
+    <span class="section-label">✦ Popular Themes</span>
+    <h2 class="section-title">Pick Your Vibe</h2>
+    <p class="section-sub">We can bring any theme to life. These are just a few client favorites.</p>
+  </div>
+  <div class="themes-grid">
+    <div class="theme-card t1"><span class="theme-emoji">🌸</span><div class="theme-name">Floral Garden</div></div>
+    <div class="theme-card t2"><span class="theme-emoji">✨</span><div class="theme-name">Glam & Gold</div></div>
+    <div class="theme-card t3"><span class="theme-emoji">🌊</span><div class="theme-name">Tropical Beach</div></div>
+    <div class="theme-card t4"><span class="theme-emoji">🦄</span><div class="theme-name">Unicorn Magic</div></div>
+    <div class="theme-card t5"><span class="theme-emoji">🤠</span><div class="theme-name">Wild West</div></div>
+    <div class="theme-card t6"><span class="theme-emoji">🚀</span><div class="theme-name">Galaxy & Space</div></div>
+    <div class="theme-card t7"><span class="theme-emoji">🍕</span><div class="theme-name">Retro Diner</div></div>
+    <div class="theme-card t8"><span class="theme-emoji">🌴</span><div class="theme-name">Boho Chic</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <span class="section-label">✦ Happy Clients</span>
+    <h2 class="section-title">They Loved It. You Will Too.</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-quote tq-pink">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Pop & Celebrate turned our backyard into an absolute wonderland for my daughter's 5th birthday. Every single guest was blown away. 10/10 would use them forever.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#FFE0F0">👩</div>
+        <div><div class="testi-name">Sarah M.</div><div class="testi-event">Kids Birthday Party</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote tq-yellow">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">I was skeptical about hiring a planner for our office holiday party but WOW. People are still talking about it three months later. Totally worth every penny.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#FFF3C0">👨‍💼</div>
+        <div><div class="testi-name">James T.</div><div class="testi-event">Corporate Holiday Party</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote tq-cyan">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">My surprise 30th was literally a dream. I cried happy tears. They kept the secret for a month AND made everything look like a Pinterest board come to life.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:#C0F0FF">🎂</div>
+        <div><div class="testi-name">Priya L.</div><div class="testi-event">Surprise Birthday</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <span class="cta-emojis">🎊 🎈 🥳</span>
+  <h2 class="section-title">Ready to Get This Party Started?</h2>
+  <p>Book your free 30-minute consultation today. No commitment, just big ideas and good vibes.</p>
+  <a href="mailto:hello@popandcelebrate.com" class="cta-btn">Let's Plan Your Party 🎉</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Pop<span>&</span>Celebrate</span>
+  <p>© 2026 Pop & Celebrate. Making memories, one party at a time. 🎈</p>
+</footer>
+
+<script>
+  // ── CONFETTI ──
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const colors = ['#FF1F8E','#FFE600','#00D4FF','#7DFF4F','#FF6B35','#A855F7','#FF9ECD','#FFF'];
+  const shapes = ['circle','rect','triangle'];
+  const pieces = Array.from({length: 80}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight - window.innerHeight,
+    size: Math.random() * 10 + 5,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    shape: shapes[Math.floor(Math.random() * shapes.length)],
+    speed: Math.random() * 2 + 0.5,
+    wobble: Math.random() * 0.05,
+    wobblePos: Math.random() * Math.PI * 2,
+    rotation: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.1,
+    opacity: Math.random() * 0.6 + 0.3,
+  }));
+
+  function drawPiece(p) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation);
+    ctx.globalAlpha = p.opacity;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    if (p.shape === 'circle') {
+      ctx.arc(0, 0, p.size/2, 0, Math.PI*2);
+    } else if (p.shape === 'rect') {
+      ctx.rect(-p.size/2, -p.size/4, p.size, p.size/2);
+    } else {
+      ctx.moveTo(0, -p.size/2);
+      ctx.lineTo(p.size/2, p.size/2);
+      ctx.lineTo(-p.size/2, p.size/2);
+      ctx.closePath();
+    }
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function animateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      p.wobblePos += p.wobble;
+      p.x += Math.sin(p.wobblePos) * 1.5;
+      p.y += p.speed;
+      p.rotation += p.rotSpeed;
+      if (p.y > canvas.height + 20) {
+        p.y = -20;
+        p.x = Math.random() * canvas.width;
+      }
+      drawPiece(p);
+    });
+    requestAnimationFrame(animateConfetti);
+  }
+  animateConfetti();
+
+  // ── MARQUEE ──
+  const items = ['🎉 Birthday Parties','🥂 Engagements','🎓 Graduations','🎃 Holiday Bashes','🍼 Baby Showers','🏢 Corporate Events','🌸 Garden Parties','🎊 Surprise Parties'];
+  const track = document.getElementById('marquee-track');
+  const doubled = [...items, ...items];
+  doubled.forEach(txt => {
+    const el = document.createElement('span');
+    el.className = 'marquee-item';
+    el.innerHTML = `<span>${txt}</span>✦`;
+    track.appendChild(el);
+  });
+
+  // ── SCROLL FADE-IN ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .step, .theme-card, .testi-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s, border-color 0.25s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
