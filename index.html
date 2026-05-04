@@ -4,825 +4,595 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pop & Celebrate — Party Planning Co.</title>
-<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --pink: #FF1F8E;
-    --yellow: #FFE600;
-    --cyan: #00D4FF;
-    --lime: #7DFF4F;
-    --coral: #FF6B35;
-    --purple: #A855F7;
-    --navy: #0D0D2B;
-    --white: #FFFEF5;
-  }
+:root {
+  --cream:   #F5EFE0;
+  --red:     #C1272D;
+  --red-dark:#8B1A1E;
+  --blue:    #2B4C9B;
+  --blue-lt: #3D6DB5;
+  --gold:    #C09020;
+  --gold-lt: #E8C050;
+  --navy:    #1A1F3A;
+  --white:   #FFFDF5;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23000' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+.gold-rule {
+  display: flex; align-items: center; gap: 12px;
+  margin: 0 auto;
+}
+.gold-rule::before, .gold-rule::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.gold-rule span { color: var(--gold); font-size: 1.1rem; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* NAV */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 200;
+  background: var(--navy);
+  border-bottom: 4px solid var(--gold);
+}
+.nav-stripe {
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--red) 0,var(--red) 20px, var(--white) 20px, var(--white) 40px);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 60px;
+}
+.logo {
+  font-family: 'Abril Fatface', serif;
+  font-size: 1.6rem;
+  color: var(--gold-lt);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.logo em { color: var(--red); font-style: normal; }
+nav ul { display: flex; gap: 36px; list-style: none; }
+nav ul a {
+  font-weight: 700; font-size: 0.73rem;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--cream); text-decoration: none;
+  transition: color 0.2s;
+}
+nav ul a:hover { color: var(--gold-lt); }
+.nav-cta {
+  background: var(--red) !important;
+  color: var(--white) !important;
+  padding: 10px 22px;
+  border: 2px solid var(--gold);
+}
+.nav-cta:hover { background: var(--red-dark) !important; }
 
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--white);
-    color: var(--navy);
-    overflow-x: hidden;
-  }
+/* HERO */
+#hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: 130px 40px 90px;
+  text-align: center;
+}
+.awning {
+  position: absolute; top: 0; left: 0; right: 0; height: 90px;
+  background: repeating-linear-gradient(90deg, var(--blue) 0px,var(--blue) 40px, var(--white) 40px,var(--white) 80px);
+  clip-path: polygon(0 0,100% 0,100% 60%,97.5% 100%,95% 60%,92.5% 100%,90% 60%,87.5% 100%,85% 60%,82.5% 100%,80% 60%,77.5% 100%,75% 60%,72.5% 100%,70% 60%,67.5% 100%,65% 60%,62.5% 100%,60% 60%,57.5% 100%,55% 60%,52.5% 100%,50% 60%,47.5% 100%,45% 60%,42.5% 100%,40% 60%,37.5% 100%,35% 60%,32.5% 100%,30% 60%,27.5% 100%,25% 60%,22.5% 100%,20% 60%,17.5% 100%,15% 60%,12.5% 100%,10% 60%,7.5% 100%,5% 60%,2.5% 100%,0 60%);
+  opacity: 0.9; z-index: 1;
+}
+.awning-shadow {
+  position: absolute; top: 85px; left: 0; right: 0; height: 12px;
+  background: linear-gradient(180deg,rgba(0,0,0,0.35),transparent);
+  z-index: 2;
+}
+.banner-ribbon {
+  position: relative; z-index: 3;
+  background: var(--red);
+  border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold);
+  padding: 12px 60px; margin-top: 50px; margin-bottom: 36px;
+  font-family: 'Josefin Sans', sans-serif; font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 4px; color: var(--gold-lt);
+  text-transform: uppercase; display: inline-block;
+  clip-path: polygon(12px 0%,calc(100% - 12px) 0%,100% 50%,calc(100% - 12px) 100%,12px 100%,0% 50%);
+  animation: fadeDown 0.8s ease 0.2s both;
+}
+.hero-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.95; color: var(--white);
+  text-transform: uppercase; letter-spacing: 3px;
+  position: relative; z-index: 3;
+  animation: fadeDown 0.8s ease 0.4s both;
+  text-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+.line-red  { color: var(--red); display: block; }
+.line-gold { color: var(--gold-lt); display: block; font-size: 0.5em; letter-spacing: 6px; margin-top: 8px; }
+.hero-divider {
+  position: relative; z-index: 3;
+  display: flex; align-items: center; gap: 16px; margin: 28px 0;
+  animation: fadeDown 0.8s ease 0.6s both;
+}
+.hero-divider::before,.hero-divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+.hero-divider span { color:var(--gold); font-size:1.4rem; }
+.hero-sub {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 1.2rem; color: rgba(245,239,224,0.8); line-height: 1.75;
+  max-width: 500px; margin: 0 auto 40px;
+  position: relative; z-index: 3;
+  animation: fadeDown 0.8s ease 0.7s both;
+}
+.hero-btns {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  position: relative; z-index: 3;
+  animation: fadeDown 0.8s ease 0.85s both;
+}
+.btn-primary {
+  background: var(--red); color: var(--white);
+  font-weight: 700; font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
+  padding: 18px 44px; border: 2px solid var(--gold);
+  text-decoration: none; display: inline-block;
+  transition: background 0.2s, transform 0.2s; position: relative;
+}
+.btn-primary::before { content:''; position:absolute; inset:4px; border:1px solid rgba(255,255,255,0.2); pointer-events:none; }
+.btn-primary:hover { background:var(--red-dark); transform:translateY(-2px); }
+.btn-secondary {
+  background: transparent; color: var(--gold-lt);
+  font-weight: 700; font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
+  padding: 18px 44px; border: 2px solid var(--gold);
+  text-decoration: none; display: inline-block;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-secondary:hover { background:var(--gold); color:var(--navy); }
+.hero-icons {
+  position: relative; z-index: 3; margin-top: 56px;
+  display: flex; gap: 40px; justify-content: center; font-size: 2.8rem;
+  animation: fadeDown 0.8s ease 1s both;
+}
+.hero-icon {
+  animation: iconFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+.hero-icon:nth-child(2){animation-delay:.8s}
+.hero-icon:nth-child(3){animation-delay:1.6s}
+.hero-icon:nth-child(4){animation-delay:2.4s}
+.hero-icon:nth-child(5){animation-delay:3.2s}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+.hero-stats {
+  position: relative; z-index: 3; display: flex;
+  margin-top: 56px; border: 2px solid var(--gold);
+  animation: fadeDown 0.8s ease 1.1s both;
+}
+.stat-box {
+  padding: 20px 42px; text-align: center;
+  border-right: 1px solid var(--gold);
+}
+.stat-box:last-child{border-right:none}
+.stat-num { font-family:'Abril Fatface',serif; font-size:2.2rem; color:var(--gold-lt); display:block; line-height:1; }
+.stat-label { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:rgba(245,239,224,0.5); margin-top:6px; display:block; font-weight:600; }
 
-  /* ── CONFETTI CANVAS ── */
-  #confetti-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
+/* MARQUEE */
+.marquee-bar {
+  background: var(--red);
+  border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold);
+  padding: 12px 0; overflow: hidden; position: relative; z-index: 1;
+}
+.marquee-track { display:flex; white-space:nowrap; animation: marquee 25s linear infinite; }
+.marquee-item {
+  font-weight: 700; font-size: 0.7rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold-lt); margin-right: 50px;
+}
+.marquee-item .dot { margin: 0 14px; color: var(--white); opacity: 0.45; }
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 60px;
-    background: var(--navy);
-    border-bottom: 4px solid var(--yellow);
-  }
-  .logo {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.8rem;
-    color: var(--yellow);
-    letter-spacing: 1px;
-  }
-  .logo span { color: var(--pink); }
-  nav ul { display: flex; gap: 32px; list-style: none; }
-  nav ul li a {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    color: var(--white);
-    text-decoration: none;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    transition: color 0.2s;
-  }
-  nav ul li a:hover { color: var(--yellow); }
-  .nav-cta {
-    background: var(--pink);
-    color: var(--white) !important;
-    padding: 10px 22px;
-    border-radius: 50px;
-    transition: background 0.2s, transform 0.2s !important;
-    border: 3px solid var(--white);
-  }
-  .nav-cta:hover { background: var(--yellow) !important; color: var(--navy) !important; transform: scale(1.05) !important; }
+/* COMMONS */
+section { position:relative; z-index:1; }
+.section-eyebrow {
+  font-weight: 700; font-size: 0.68rem; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block;
+}
+.section-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(2.2rem,4vw,3.2rem); line-height:1.05;
+  margin-bottom: 14px; text-transform: uppercase; letter-spacing: 2px;
+}
+.section-sub {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 1.05rem; line-height: 1.75; color: #5a4e3a; max-width: 500px;
+}
 
-  /* ── HERO ── */
-  #hero {
-    position: relative;
-    min-height: 100vh;
-    background: var(--navy);
-    display: flex; align-items: center;
-    overflow: hidden;
-    padding: 120px 60px 60px;
-  }
-  .hero-bg-shapes {
-    position: absolute; inset: 0; pointer-events: none;
-  }
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.35;
-  }
-  .blob-1 { width: 500px; height: 500px; background: var(--pink); top: -100px; right: -100px; animation: blobFloat 8s ease-in-out infinite; }
-  .blob-2 { width: 350px; height: 350px; background: var(--cyan); bottom: -50px; left: -80px; animation: blobFloat 10s ease-in-out infinite reverse; }
-  .blob-3 { width: 280px; height: 280px; background: var(--yellow); top: 40%; left: 30%; animation: blobFloat 12s ease-in-out infinite; }
+/* SERVICES */
+#services { padding: 100px 60px; background: var(--cream); }
+.services-header { text-align: center; margin-bottom: 70px; }
+.services-header .section-sub { margin: 0 auto; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 2px; max-width: 1200px; margin: 0 auto;
+  border: 2px solid var(--gold);
+  outline: 6px solid var(--navy); outline-offset: 6px;
+}
+.service-card {
+  background: var(--white); padding: 44px 36px;
+  border: 1px solid rgba(192,144,32,0.2);
+  position: relative; overflow: hidden;
+  transition: background 0.25s, transform 0.25s; cursor: default;
+}
+.service-card::before {
+  content:''; position:absolute; top:0; left:0; width:4px; height:100%;
+}
+.sc-red::before   { background: var(--red); }
+.sc-blue::before  { background: var(--blue); }
+.sc-gold::before  { background: var(--gold); }
+.service-card:hover { background: #FFF8EE; transform: translateX(4px); }
+.svc-icon { font-size:2.4rem; display:block; margin-bottom:18px; line-height:1; }
+.svc-num {
+  position: absolute; top: 16px; right: 20px;
+  font-family: 'Abril Fatface', serif; font-size: 3.5rem;
+  color: rgba(192,144,32,0.12); line-height:1; user-select:none;
+}
+.svc-name {
+  font-family: 'Abril Fatface', serif; font-size: 1.4rem;
+  letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;
+}
+.svc-desc {
+  font-family: 'Playfair Display', serif; font-size: 0.95rem;
+  line-height: 1.7; color: #5a4e3a; font-style: italic;
+}
+.svc-tag {
+  display: inline-block; margin-top: 18px;
+  font-weight: 700; font-size: 0.65rem;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold); border-top: 1px solid var(--gold); padding-top: 8px;
+}
 
-  @keyframes blobFloat {
-    0%, 100% { transform: translate(0,0) scale(1); }
-    33% { transform: translate(30px,-20px) scale(1.05); }
-    66% { transform: translate(-15px,25px) scale(0.95); }
-  }
+/* PROCESS */
+#process {
+  padding: 100px 60px; background: var(--navy);
+  position: relative; overflow: hidden;
+}
+#process::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:8px;
+  background: repeating-linear-gradient(90deg,var(--red) 0,var(--red) 20px,var(--gold) 20px,var(--gold) 40px);
+}
+#process .section-eyebrow { color: var(--gold-lt); }
+#process .section-title { color: var(--white); }
+#process .section-sub { color: rgba(245,239,224,0.6); }
+.steps {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 1px; max-width: 1100px; margin-top: 60px;
+  background: var(--gold); border: 1px solid var(--gold);
+}
+.step {
+  padding: 48px 36px; background: var(--navy);
+  position: relative; transition: background 0.2s;
+}
+.step:hover { background: #232A50; }
+.step-num {
+  font-family: 'Abril Fatface', serif; font-size: 4.5rem;
+  line-height: 1; margin-bottom: 16px; display: block;
+}
+.sn1{color:var(--red)}.sn2{color:var(--blue-lt)}.sn3{color:var(--gold-lt)}.sn4{color:#E88050}
+.step-title {
+  font-family: 'Abril Fatface', serif; font-size: 1.2rem;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); margin-bottom: 12px;
+}
+.step-desc {
+  font-family: 'Playfair Display', serif; font-size: 0.9rem;
+  font-style: italic; line-height: 1.7; color: rgba(245,239,224,0.55);
+}
 
-  .hero-content { position: relative; z-index: 2; max-width: 680px; }
-  .hero-badge {
-    display: inline-block;
-    background: var(--yellow);
-    color: var(--navy);
-    font-weight: 800;
-    font-size: 0.85rem;
-    padding: 6px 18px;
-    border-radius: 50px;
-    margin-bottom: 24px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
-  }
-  .hero-title {
-    font-family: 'Fredoka One', cursive;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    line-height: 1.05;
-    color: var(--white);
-    margin-bottom: 24px;
-    animation: slideUp 0.7s ease 0.4s both;
-  }
-  .hero-title .accent-pink { color: var(--pink); }
-  .hero-title .accent-yellow { color: var(--yellow); }
-  .hero-sub {
-    font-size: 1.2rem;
-    color: rgba(255,254,245,0.8);
-    line-height: 1.7;
-    margin-bottom: 40px;
-    max-width: 500px;
-    animation: slideUp 0.7s ease 0.6s both;
-  }
-  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: slideUp 0.7s ease 0.8s both; }
-  .btn-primary {
-    background: var(--pink);
-    color: white;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 1.05rem;
-    padding: 16px 36px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    border: 3px solid var(--pink);
-    transition: transform 0.2s, background 0.2s;
-    box-shadow: 6px 6px 0 var(--yellow);
-  }
-  .btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--yellow); }
-  .btn-secondary {
-    background: transparent;
-    color: white;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 1.05rem;
-    padding: 16px 36px;
-    border: 3px solid rgba(255,255,255,0.4);
-    border-radius: 50px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+/* THEMES */
+#themes { padding: 100px 60px; background: var(--white); }
+.themes-header { text-align: center; margin-bottom: 64px; }
+.themes-header .section-sub { margin: 0 auto; }
+.themes-grid {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 20px; max-width: 1200px; margin: 0 auto;
+}
+.theme-card {
+  padding: 40px 20px 32px; text-align: center;
+  border: 2px solid var(--navy); background: var(--cream);
+  cursor: default; position: relative; overflow: hidden;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+.theme-card::before { content:''; position:absolute; top:0;left:0;right:0; height:4px; }
+.tc-red::before   { background:var(--red); }
+.tc-blue::before  { background:var(--blue); }
+.tc-gold::before  { background:var(--gold); }
+.theme-card:hover { transform: translateY(-6px); background: var(--white); border-color: var(--gold); }
+.theme-emoji { font-size: 2.8rem; display: block; margin-bottom: 14px; }
+.theme-name { font-weight: 700; font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase; }
 
-  .hero-img {
-    position: absolute;
-    right: 5%;
-    bottom: 0;
-    font-size: 16rem;
-    line-height: 1;
-    z-index: 2;
-    animation: float 4s ease-in-out infinite;
-    filter: drop-shadow(0 0 60px rgba(255,31,142,0.4));
-  }
-  @keyframes float {
-    0%,100% { transform: translateY(0) rotate(-3deg); }
-    50% { transform: translateY(-20px) rotate(3deg); }
-  }
+/* TESTIMONIALS */
+#testimonials { padding: 100px 60px; background: var(--cream); }
+.testimonials-header { text-align: center; margin-bottom: 64px; }
+.testimonials-header .section-sub { margin: 0 auto; }
+.testi-grid {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 24px; max-width: 1100px; margin: 0 auto;
+}
+.testi-card {
+  background: var(--white); border: 1px solid rgba(192,144,32,0.3);
+  padding: 44px 40px; position: relative;
+  transition: transform 0.2s, box-shadow 0.2s, outline-color 0.2s;
+  outline: 4px solid transparent;
+}
+.testi-card::before {
+  content:'\201C'; font-family:'Abril Fatface',serif; font-size:6rem;
+  color:var(--red); opacity:0.12; position:absolute; top:10px; left:20px; line-height:1;
+}
+.testi-card:hover { transform:translateY(-4px); outline-color:var(--gold); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+.stars { color:var(--gold); font-size:0.85rem; letter-spacing:3px; margin-bottom:20px; display:block; }
+.testi-text {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:1rem; line-height:1.8; color:#4a3f2f; margin-bottom:28px; position:relative;
+}
+.testi-rule { height:1px; background:linear-gradient(90deg,var(--gold),transparent); margin-bottom:20px; }
+.testi-author { display:flex; align-items:center; gap:14px; }
+.testi-avatar {
+  width:46px; height:46px; border-radius:50%;
+  background:var(--cream); border:2px solid var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.4rem; flex-shrink:0;
+}
+.testi-name { font-weight:700; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; }
+.testi-event { font-family:'Playfair Display',serif; font-style:italic; font-size:0.82rem; color:var(--gold); margin-top:3px; }
 
-  .hero-stats {
-    position: absolute;
-    bottom: 50px;
-    right: 5%;
-    display: flex;
-    gap: 32px;
-    z-index: 3;
-    animation: slideUp 0.7s ease 1s both;
-  }
-  .stat-box {
-    background: rgba(255,254,245,0.08);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.15);
-    border-radius: 16px;
-    padding: 16px 24px;
-    text-align: center;
-  }
-  .stat-num {
-    font-family: 'Fredoka One', cursive;
-    font-size: 2rem;
-    color: var(--yellow);
-    display: block;
-  }
-  .stat-label { font-size: 0.8rem; color: rgba(255,254,245,0.6); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+/* CTA */
+#cta {
+  padding: 120px 60px; background: var(--red);
+  text-align: center; position: relative; overflow: hidden;
+}
+#cta::before {
+  content:''; position:absolute; inset:0;
+  background: repeating-linear-gradient(-45deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 20px,rgba(0,0,0,0.055) 20px,rgba(0,0,0,0.055) 40px);
+}
+#cta::after {
+  content:''; position:absolute;
+  top:20px; bottom:20px; left:20px; right:20px;
+  border:2px solid rgba(232,192,80,0.4); pointer-events:none;
+}
+.cta-inner { position:relative; z-index:2; }
+.cta-eyebrow { font-weight:700; font-size:0.72rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold-lt); margin-bottom:20px; display:block; }
+.cta-title {
+  font-family:'Abril Fatface',serif; font-size:clamp(3rem,6vw,5.5rem);
+  line-height:0.95; color:var(--white); text-transform:uppercase;
+  letter-spacing:3px; margin-bottom:12px; text-shadow:3px 3px 0 rgba(0,0,0,0.2);
+}
+.cta-title .sub-line {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:0.42em; display:block; letter-spacing:1px;
+  color:var(--gold-lt); text-transform:none; margin-top:14px;
+}
+.cta-rule { display:flex; align-items:center; gap:16px; max-width:380px; margin:28px auto 36px; }
+.cta-rule::before,.cta-rule::after { content:''; flex:1; height:1px; background:rgba(232,192,80,0.45); }
+.cta-rule span { color:var(--gold-lt); }
+.cta-btn {
+  background:var(--navy); color:var(--gold-lt);
+  font-weight:700; font-size:0.78rem; letter-spacing:3px; text-transform:uppercase;
+  padding:20px 56px; border:2px solid var(--gold);
+  cursor:pointer; text-decoration:none; display:inline-block;
+  transition:background 0.2s, transform 0.2s; position:relative;
+}
+.cta-btn::before { content:''; position:absolute; inset:4px; border:1px solid rgba(232,192,80,0.2); pointer-events:none; }
+.cta-btn:hover { background:#0D1226; transform:translateY(-2px); }
 
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1); }
-  }
+/* FOOTER */
+footer {
+  background: var(--navy); border-top: 4px solid var(--gold);
+  padding: 48px 60px; text-align: center;
+}
+.footer-stripe {
+  height:6px; margin-bottom:32px;
+  background:repeating-linear-gradient(90deg,var(--blue) 0,var(--blue) 20px,var(--red) 20px,var(--red) 40px);
+}
+.footer-logo {
+  font-family:'Abril Fatface',serif; font-size:2rem;
+  letter-spacing:3px; color:var(--gold-lt); text-transform:uppercase;
+  display:block; margin-bottom:8px;
+}
+.footer-logo em { color:var(--red); font-style:normal; }
+footer p {
+  font-size:0.68rem; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(245,239,224,0.32); margin-top:20px;
+}
 
-  /* ── MARQUEE ── */
-  .marquee-bar {
-    background: var(--yellow);
-    padding: 14px 0;
-    overflow: hidden;
-    border-top: 4px solid var(--navy);
-    border-bottom: 4px solid var(--navy);
-    position: relative; z-index: 2;
-  }
-  .marquee-track {
-    display: flex;
-    white-space: nowrap;
-    animation: marquee 20s linear infinite;
-  }
-  .marquee-item {
-    font-family: 'Boogaloo', cursive;
-    font-size: 1.3rem;
-    color: var(--navy);
-    margin-right: 60px;
-  }
-  .marquee-item span { margin-right: 20px; }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
 
-  /* ── SECTION COMMONS ── */
-  section { position: relative; z-index: 1; }
-  .section-label {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: inline-block;
-  }
-  .section-title {
-    font-family: 'Fredoka One', cursive;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-  .section-sub {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #555;
-    max-width: 520px;
-  }
-
-  /* ── SERVICES ── */
-  #services {
-    padding: 100px 60px;
-    background: var(--white);
-  }
-  .services-header { text-align: center; margin-bottom: 64px; }
-  .services-header .section-label { color: var(--pink); }
-  .services-header .section-sub { margin: 0 auto; }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .service-card {
-    background: white;
-    border: 3px solid var(--navy);
-    border-radius: 24px;
-    padding: 36px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
-    cursor: default;
-    box-shadow: 6px 6px 0 var(--navy);
-  }
-  .service-card:hover { transform: translate(-4px,-4px); box-shadow: 10px 10px 0 var(--navy); }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6px;
-  }
-  .card-pink::before { background: var(--pink); }
-  .card-yellow::before { background: var(--yellow); }
-  .card-cyan::before { background: var(--cyan); }
-  .card-lime::before { background: var(--lime); }
-  .card-coral::before { background: var(--coral); }
-  .card-purple::before { background: var(--purple); }
-
-  .service-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
-  .service-name {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: var(--navy);
-  }
-  .service-desc { font-size: 0.95rem; line-height: 1.6; color: #555; }
-  .service-tag {
-    display: inline-block;
-    margin-top: 16px;
-    background: var(--navy);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 5px 14px;
-    border-radius: 50px;
-    letter-spacing: 0.5px;
-  }
-
-  /* ── HOW IT WORKS ── */
-  #process {
-    padding: 100px 60px;
-    background: var(--navy);
-    overflow: hidden;
-  }
-  #process .section-label { color: var(--cyan); }
-  #process .section-title { color: var(--white); }
-  #process .section-sub { color: rgba(255,254,245,0.65); }
-  .process-header { margin-bottom: 64px; }
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 32px;
-    max-width: 1100px;
-    position: relative;
-  }
-  .step {
-    position: relative;
-    padding: 36px 32px;
-    border-radius: 24px;
-    border: 2px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(10px);
-    transition: transform 0.2s, border-color 0.2s;
-  }
-  .step:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.25); }
-  .step-number {
-    font-family: 'Fredoka One', cursive;
-    font-size: 4rem;
-    line-height: 1;
-    margin-bottom: 16px;
-    display: block;
-  }
-  .s1 .step-number { color: var(--pink); }
-  .s2 .step-number { color: var(--yellow); }
-  .s3 .step-number { color: var(--cyan); }
-  .s4 .step-number { color: var(--lime); }
-  .step-title { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: white; margin-bottom: 10px; }
-  .step-desc { font-size: 0.95rem; color: rgba(255,254,245,0.65); line-height: 1.6; }
-
-  /* ── THEMES ── */
-  #themes {
-    padding: 100px 60px;
-    background: #FFF8F0;
-  }
-  .themes-header { text-align: center; margin-bottom: 64px; }
-  .themes-header .section-label { color: var(--coral); }
-  .themes-header .section-sub { margin: 0 auto; }
-  .themes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .theme-card {
-    border-radius: 20px;
-    padding: 40px 20px;
-    text-align: center;
-    border: 3px solid var(--navy);
-    cursor: default;
-    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
-    box-shadow: 5px 5px 0 var(--navy);
-  }
-  .theme-card:hover { transform: translate(-3px,-3px) rotate(-1deg); }
-  .theme-emoji { font-size: 3rem; display: block; margin-bottom: 12px; }
-  .theme-name { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: var(--navy); }
-  .t1 { background: #FFE0F0; }
-  .t2 { background: #FFF3C0; }
-  .t3 { background: #C0F0FF; }
-  .t4 { background: #DDFFC0; }
-  .t5 { background: #FFE0D0; }
-  .t6 { background: #E8D5FF; }
-  .t7 { background: #FFD0D0; }
-  .t8 { background: #D0FFE8; }
-
-  /* ── TESTIMONIALS ── */
-  #testimonials {
-    padding: 100px 60px;
-    background: var(--white);
-  }
-  .testimonials-header { text-align: center; margin-bottom: 64px; }
-  .testimonials-header .section-label { color: var(--purple); }
-  .testi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .testi-card {
-    background: white;
-    border: 3px solid var(--navy);
-    border-radius: 24px;
-    padding: 36px;
-    position: relative;
-    box-shadow: 5px 5px 0 var(--navy);
-    transition: transform 0.2s;
-  }
-  .testi-card:hover { transform: translate(-2px,-2px); }
-  .testi-quote {
-    font-size: 3rem;
-    line-height: 1;
-    font-family: 'Fredoka One', cursive;
-    margin-bottom: 16px;
-  }
-  .tq-pink { color: var(--pink); }
-  .tq-yellow { color: var(--yellow); }
-  .tq-cyan { color: var(--cyan); }
-  .testi-text { font-size: 1rem; line-height: 1.7; color: #444; margin-bottom: 24px; }
-  .testi-author { display: flex; align-items: center; gap: 12px; }
-  .testi-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    font-size: 1.4rem;
-    display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--navy);
-    flex-shrink: 0;
-  }
-  .testi-name { font-weight: 800; font-size: 0.9rem; }
-  .testi-event { font-size: 0.8rem; color: #888; }
-  .stars { color: var(--yellow); margin-bottom: 12px; font-size: 1rem; letter-spacing: 2px; }
-
-  /* ── CTA ── */
-  #cta {
-    padding: 100px 60px;
-    background: var(--pink);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  #cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 20px,
-      rgba(0,0,0,0.04) 20px,
-      rgba(0,0,0,0.04) 40px
-    );
-  }
-  #cta .section-title { color: white; font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; position: relative; }
-  #cta p { color: rgba(255,255,255,0.85); font-size: 1.15rem; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; position: relative; }
-  .cta-btn {
-    background: var(--navy);
-    color: var(--yellow);
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
-    padding: 18px 48px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
-    position: relative;
-  }
-  .cta-btn:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 rgba(0,0,0,0.25); }
-  .cta-emojis {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 24px;
-    animation: float 3s ease-in-out infinite;
-    position: relative;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    color: rgba(255,254,245,0.6);
-    text-align: center;
-    padding: 40px 60px;
-    border-top: 4px solid var(--yellow);
-  }
-  .footer-logo {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.5rem;
-    color: var(--yellow);
-    margin-bottom: 12px;
-    display: block;
-  }
-  .footer-logo span { color: var(--pink); }
-  footer p { font-size: 0.88rem; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    nav ul { display: none; }
-    #hero { padding: 100px 24px 200px; }
-    .hero-img { font-size: 8rem; right: 10px; }
-    .hero-stats { left: 24px; right: 24px; bottom: 20px; }
-    #services, #process, #themes, #testimonials, #cta { padding: 60px 24px; }
-    footer { padding: 32px 24px; }
-  }
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav ul{display:none}
+  .nav-inner{padding:14px 24px}
+  #hero{padding:120px 24px 80px}
+  .hero-stats{flex-direction:column;gap:0}
+  .stat-box{border-right:none;border-bottom:1px solid var(--gold)}
+  .stat-box:last-child{border-bottom:none}
+  #services,#process,#themes,#testimonials,#cta{padding:60px 24px}
+  footer{padding:40px 24px}
+  .steps{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<canvas id="confetti-canvas"></canvas>
-
-<!-- NAV -->
 <nav>
-  <div class="logo">Pop<span>&</span>Celebrate</div>
-  <ul>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#process">How It Works</a></li>
-    <li><a href="#themes">Themes</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
-    <li><a href="#cta" class="nav-cta">Book Now 🎉</a></li>
-  </ul>
+  <div class="nav-stripe"></div>
+  <div class="nav-inner">
+    <div class="logo">Pop <em>&</em> Celebrate</div>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">How It Works</a></li>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#cta" class="nav-cta">Book Now</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-shapes">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+  <div class="awning"></div>
+  <div class="awning-shadow"></div>
+  <div class="banner-ribbon">✦ Est. 2018 · Award-Winning Event Planners ✦</div>
+  <h1 class="hero-title">
+    Pop <em style="font-style:normal;color:var(--gold-lt)">&</em><br>
+    <span class="line-red">Celebrate</span>
+    <span class="line-gold">Party Planning Co.</span>
+  </h1>
+  <div class="hero-divider"><span>✦</span></div>
+  <p class="hero-sub">From intimate gatherings to grand affairs — we craft celebrations that leave your guests breathless and your heart full.</p>
+  <div class="hero-btns">
+    <a href="#cta" class="btn-primary">Book a Free Consult</a>
+    <a href="#services" class="btn-secondary">Our Services</a>
   </div>
-  <div class="hero-content">
-    <div class="hero-badge">✨ Your Party, Our Obsession</div>
-    <h1 class="hero-title">
-      Let's Make Your<br>
-      Party <span class="accent-pink">Absolutely</span><br>
-      <span class="accent-yellow">Unforgettable.</span>
-    </h1>
-    <p class="hero-sub">From intimate birthdays to epic celebrations — we handle every detail so you can focus on having the time of your life.</p>
-    <div class="hero-btns">
-      <a href="#cta" class="btn-primary">Book a Free Consult 🎊</a>
-      <a href="#services" class="btn-secondary">See What We Do →</a>
-    </div>
+  <div class="hero-icons">
+    <span class="hero-icon">🎂</span>
+    <span class="hero-icon">🍭</span>
+    <span class="hero-icon">🎊</span>
+    <span class="hero-icon">🍰</span>
+    <span class="hero-icon">🎈</span>
   </div>
-  <div class="hero-img">🎉</div>
   <div class="hero-stats">
-    <div class="stat-box">
-      <span class="stat-num">500+</span>
-      <span class="stat-label">Parties Thrown</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num">98%</span>
-      <span class="stat-label">Happy Clients</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num">7★</span>
-      <span class="stat-label">Avg Rating</span>
-    </div>
+    <div class="stat-box"><span class="stat-num">500+</span><span class="stat-label">Parties Thrown</span></div>
+    <div class="stat-box"><span class="stat-num">98%</span><span class="stat-label">Happy Clients</span></div>
+    <div class="stat-box"><span class="stat-num">8 Yrs</span><span class="stat-label">In Business</span></div>
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-bar">
   <div class="marquee-track" id="marquee-track"></div>
 </div>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="services-header">
-    <span class="section-label">✦ What We Do</span>
-    <h2 class="section-title">Every Party. Every Occasion.</h2>
-    <p class="section-sub">No party too big, no detail too small. We've got you covered from balloons to bonbons.</p>
+    <span class="section-eyebrow">✦ What We Offer</span>
+    <h2 class="section-title" style="color:var(--navy)">Every Occasion,<br>Handled with Care</h2>
+    <div class="gold-rule" style="max-width:280px;margin:16px auto 20px"><span>✦</span></div>
+    <p class="section-sub">No party too intimate, no celebration too grand. We bring every vision to life.</p>
   </div>
-  <div class="services-grid">
-    <div class="service-card card-pink">
-      <span class="service-emoji">🎂</span>
-      <div class="service-name">Birthdays</div>
-      <p class="service-desc">From toddler tantrums to milestone 50ths — we create the birthday bash of your dreams.</p>
-      <span class="service-tag">Ages 1–100+</span>
-    </div>
-    <div class="service-card card-yellow">
-      <span class="service-emoji">💍</span>
-      <div class="service-name">Engagement Parties</div>
-      <p class="service-desc">Pop the champagne! Celebrate love with a gorgeous gathering your guests will rave about.</p>
-      <span class="service-tag">Romantic & Fun</span>
-    </div>
-    <div class="service-card card-cyan">
-      <span class="service-emoji">🎓</span>
-      <div class="service-name">Graduation Parties</div>
-      <p class="service-desc">Celebrate the big achievement in style — caps, gowns, and a whole lot of fun.</p>
-      <span class="service-tag">Cap & Gown Ready</span>
-    </div>
-    <div class="service-card card-lime">
-      <span class="service-emoji">🏢</span>
-      <div class="service-name">Corporate Events</div>
-      <p class="service-desc">Team building, holiday parties, and product launches that actually get people excited.</p>
-      <span class="service-tag">Office-Approved</span>
-    </div>
-    <div class="service-card card-coral">
-      <span class="service-emoji">🍼</span>
-      <div class="service-name">Baby Showers</div>
-      <p class="service-desc">Sweet, stylish, and full of love — because the new arrival deserves the best welcome.</p>
-      <span class="service-tag">Sprinkle or Full</span>
-    </div>
-    <div class="service-card card-purple">
-      <span class="service-emoji">🎃</span>
-      <div class="service-name">Holiday & Themed</div>
-      <p class="service-desc">Halloween bashes, Christmas extravaganzas, and every wild themed party in between.</p>
-      <span class="service-tag">Any Season</span>
-    </div>
+  <div class="services-grid reveal">
+    <div class="service-card sc-red"><span class="svc-num">01</span><span class="svc-icon">🎂</span><div class="svc-name">Birthdays</div><p class="svc-desc">From first birthdays to golden jubilees — we make every year count with style and heart.</p><span class="svc-tag">All Ages Welcome</span></div>
+    <div class="service-card sc-blue"><span class="svc-num">02</span><span class="svc-icon">💍</span><div class="svc-name">Engagements</div><p class="svc-desc">Celebrate love in style. We craft the perfect setting for your most memorable announcement.</p><span class="svc-tag">Romantic & Elegant</span></div>
+    <div class="service-card sc-gold"><span class="svc-num">03</span><span class="svc-icon">🎓</span><div class="svc-name">Graduations</div><p class="svc-desc">Honor the achievement of a lifetime with a gathering as grand as the moment deserves.</p><span class="svc-tag">Milestone Events</span></div>
+    <div class="service-card sc-red"><span class="svc-num">04</span><span class="svc-icon">🏢</span><div class="svc-name">Corporate Events</div><p class="svc-desc">Team celebrations and holiday parties that your colleagues will genuinely enjoy attending.</p><span class="svc-tag">All Company Sizes</span></div>
+    <div class="service-card sc-blue"><span class="svc-num">05</span><span class="svc-icon">🍼</span><div class="svc-name">Baby Showers</div><p class="svc-desc">Sweet, stylish welcomes for your newest arrival — every single detail lovingly tended to.</p><span class="svc-tag">Sprinkle or Full</span></div>
+    <div class="service-card sc-gold"><span class="svc-num">06</span><span class="svc-icon">🎃</span><div class="svc-name">Themed Events</div><p class="svc-desc">Holiday bashes, costume galas, and every wild themed affair you can dream up.</p><span class="svc-tag">Any Season</span></div>
   </div>
 </section>
 
-<!-- PROCESS -->
 <section id="process">
-  <div class="process-header">
-    <span class="section-label">✦ How It Works</span>
-    <h2 class="section-title">Easy as 1, 2, 3... 4!</h2>
-    <p class="section-sub">We make planning effortless. Here's how we go from idea to celebration.</p>
-  </div>
-  <div class="steps">
-    <div class="step s1">
-      <span class="step-number">01</span>
-      <div class="step-title">Tell Us Your Dream</div>
-      <p class="step-desc">Book a free consult and spill all your party ideas — the wilder, the better. We love a challenge.</p>
-    </div>
-    <div class="step s2">
-      <span class="step-number">02</span>
-      <div class="step-title">We Build the Plan</div>
-      <p class="step-desc">Our team crafts a custom proposal with theme, vendors, timeline, and full budget breakdown.</p>
-    </div>
-    <div class="step s3">
-      <span class="step-number">03</span>
-      <div class="step-title">We Handle Everything</div>
-      <p class="step-desc">From florals to DJs to catering — we coordinate every vendor and detail, stress-free.</p>
-    </div>
-    <div class="step s4">
-      <span class="step-number">04</span>
-      <div class="step-title">You Party Hard</div>
-      <p class="step-desc">Show up, enjoy every moment, and leave the breakdown to us. Your only job is having fun.</p>
+  <div style="max-width:1100px;margin:0 auto">
+    <span class="section-eyebrow">✦ How It Works</span>
+    <h2 class="section-title">Simple as One,<br>Two, Three, Four</h2>
+    <p class="section-sub">We make planning effortless so you can be fully present for the celebration.</p>
+    <div class="steps reveal">
+      <div class="step"><span class="step-num sn1">01</span><div class="step-title">Tell Us Your Vision</div><p class="step-desc">Book a free consult and share every wild idea. The bigger the dream, the better.</p></div>
+      <div class="step"><span class="step-num sn2">02</span><div class="step-title">We Build the Plan</div><p class="step-desc">Our team crafts a tailored proposal — theme, vendors, timeline, and full budget.</p></div>
+      <div class="step"><span class="step-num sn3">03</span><div class="step-title">We Handle It All</div><p class="step-desc">Every vendor, every detail, every last ribbon — managed by our expert team.</p></div>
+      <div class="step"><span class="step-num sn4">04</span><div class="step-title">You Celebrate</div><p class="step-desc">Show up, enjoy every single moment, and leave the rest entirely to us.</p></div>
     </div>
   </div>
 </section>
 
-<!-- THEMES -->
 <section id="themes">
   <div class="themes-header">
-    <span class="section-label">✦ Popular Themes</span>
-    <h2 class="section-title">Pick Your Vibe</h2>
-    <p class="section-sub">We can bring any theme to life. These are just a few client favorites.</p>
+    <span class="section-eyebrow">✦ Popular Themes</span>
+    <h2 class="section-title" style="color:var(--navy)">Pick Your Occasion</h2>
+    <div class="gold-rule" style="max-width:280px;margin:16px auto 20px"><span>✦</span></div>
+    <p class="section-sub">We can bring any theme to life. These are just some of our client favourites.</p>
   </div>
-  <div class="themes-grid">
-    <div class="theme-card t1"><span class="theme-emoji">🌸</span><div class="theme-name">Floral Garden</div></div>
-    <div class="theme-card t2"><span class="theme-emoji">✨</span><div class="theme-name">Glam & Gold</div></div>
-    <div class="theme-card t3"><span class="theme-emoji">🌊</span><div class="theme-name">Tropical Beach</div></div>
-    <div class="theme-card t4"><span class="theme-emoji">🦄</span><div class="theme-name">Unicorn Magic</div></div>
-    <div class="theme-card t5"><span class="theme-emoji">🤠</span><div class="theme-name">Wild West</div></div>
-    <div class="theme-card t6"><span class="theme-emoji">🚀</span><div class="theme-name">Galaxy & Space</div></div>
-    <div class="theme-card t7"><span class="theme-emoji">🍕</span><div class="theme-name">Retro Diner</div></div>
-    <div class="theme-card t8"><span class="theme-emoji">🌴</span><div class="theme-name">Boho Chic</div></div>
+  <div class="themes-grid reveal">
+    <div class="theme-card tc-red"><span class="theme-emoji">🌸</span><div class="theme-name">Floral Garden</div></div>
+    <div class="theme-card tc-gold"><span class="theme-emoji">✨</span><div class="theme-name">Glam & Gold</div></div>
+    <div class="theme-card tc-blue"><span class="theme-emoji">🌊</span><div class="theme-name">Tropical Beach</div></div>
+    <div class="theme-card tc-red"><span class="theme-emoji">🦄</span><div class="theme-name">Enchanted</div></div>
+    <div class="theme-card tc-gold"><span class="theme-emoji">🤠</span><div class="theme-name">Wild West</div></div>
+    <div class="theme-card tc-blue"><span class="theme-emoji">🚀</span><div class="theme-name">Galaxy & Space</div></div>
+    <div class="theme-card tc-red"><span class="theme-emoji">🕯️</span><div class="theme-name">Retro Diner</div></div>
+    <div class="theme-card tc-gold"><span class="theme-emoji">🌴</span><div class="theme-name">Boho Chic</div></div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="testimonials-header">
-    <span class="section-label">✦ Happy Clients</span>
-    <h2 class="section-title">They Loved It. You Will Too.</h2>
+    <span class="section-eyebrow">✦ Client Reviews</span>
+    <h2 class="section-title" style="color:var(--navy)">They Loved It.</h2>
+    <div class="gold-rule" style="max-width:280px;margin:16px auto 20px"><span>✦</span></div>
+    <p class="section-sub">Don't take our word for it — here's what our clients say.</p>
   </div>
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="testi-quote tq-pink">"</div>
-      <div class="stars">★★★★★</div>
-      <p class="testi-text">Pop & Celebrate turned our backyard into an absolute wonderland for my daughter's 5th birthday. Every single guest was blown away. 10/10 would use them forever.</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:#FFE0F0">👩</div>
-        <div><div class="testi-name">Sarah M.</div><div class="testi-event">Kids Birthday Party</div></div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-quote tq-yellow">"</div>
-      <div class="stars">★★★★★</div>
-      <p class="testi-text">I was skeptical about hiring a planner for our office holiday party but WOW. People are still talking about it three months later. Totally worth every penny.</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:#FFF3C0">👨‍💼</div>
-        <div><div class="testi-name">James T.</div><div class="testi-event">Corporate Holiday Party</div></div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-quote tq-cyan">"</div>
-      <div class="stars">★★★★★</div>
-      <p class="testi-text">My surprise 30th was literally a dream. I cried happy tears. They kept the secret for a month AND made everything look like a Pinterest board come to life.</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:#C0F0FF">🎂</div>
-        <div><div class="testi-name">Priya L.</div><div class="testi-event">Surprise Birthday</div></div>
-      </div>
-    </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card"><span class="stars">★ ★ ★ ★ ★</span><p class="testi-text">Pop & Celebrate transformed our backyard into an absolute wonderland for my daughter's birthday. Every single guest was completely enchanted from start to finish.</p><div class="testi-rule"></div><div class="testi-author"><div class="testi-avatar">👩</div><div><div class="testi-name">Sarah M.</div><div class="testi-event">Children's Birthday Party</div></div></div></div>
+    <div class="testi-card"><span class="stars">★ ★ ★ ★ ★</span><p class="testi-text">I was skeptical about hiring a planner for our office holiday party but the results were extraordinary. People are still talking about it three months later.</p><div class="testi-rule"></div><div class="testi-author"><div class="testi-avatar">👨‍💼</div><div><div class="testi-name">James T.</div><div class="testi-event">Corporate Holiday Party</div></div></div></div>
+    <div class="testi-card"><span class="stars">★ ★ ★ ★ ★</span><p class="testi-text">My surprise 30th was a complete dream. They kept the secret for a month and made everything look like a painting brought magnificently to life.</p><div class="testi-rule"></div><div class="testi-author"><div class="testi-avatar">🎂</div><div><div class="testi-name">Priya L.</div><div class="testi-event">Surprise Birthday</div></div></div></div>
   </div>
 </section>
 
-<!-- CTA -->
 <section id="cta">
-  <span class="cta-emojis">🎊 🎈 🥳</span>
-  <h2 class="section-title">Ready to Get This Party Started?</h2>
-  <p>Book your free 30-minute consultation today. No commitment, just big ideas and good vibes.</p>
-  <a href="mailto:hello@popandcelebrate.com" class="cta-btn">Let's Plan Your Party 🎉</a>
+  <div class="cta-inner">
+    <span class="cta-eyebrow">✦ Let's Get Started ✦</span>
+    <h2 class="cta-title">
+      Ready to<br>Celebrate?
+      <span class="sub-line">Your party of a lifetime awaits.</span>
+    </h2>
+    <div class="cta-rule"><span>✦</span></div>
+    <a href="mailto:hello@popandcelebrate.com" class="cta-btn">Book Your Free Consult</a>
+  </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <span class="footer-logo">Pop<span>&</span>Celebrate</span>
-  <p>© 2026 Pop & Celebrate. Making memories, one party at a time. 🎈</p>
+  <div class="footer-stripe"></div>
+  <span class="footer-logo">Pop <em>&</em> Celebrate</span>
+  <div class="gold-rule" style="max-width:220px;margin:14px auto"><span>✦</span></div>
+  <p>© 2026 Pop & Celebrate Party Planning Co. · All Rights Reserved</p>
 </footer>
 
 <script>
-  // ── CONFETTI ──
-  const canvas = document.getElementById('confetti-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
+// Marquee
+const items = ['Birthday Parties','Engagement Soirées','Graduation Bashes','Holiday Galas','Baby Showers','Corporate Events','Garden Parties','Surprise Parties'];
+const track = document.getElementById('marquee-track');
+[...items,...items].forEach(txt => {
+  const el = document.createElement('span');
+  el.className = 'marquee-item';
+  el.innerHTML = `${txt}<span class="dot">✦</span>`;
+  track.appendChild(el);
+});
 
-  const colors = ['#FF1F8E','#FFE600','#00D4FF','#7DFF4F','#FF6B35','#A855F7','#FF9ECD','#FFF'];
-  const shapes = ['circle','rect','triangle'];
-  const pieces = Array.from({length: 80}, () => ({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight - window.innerHeight,
-    size: Math.random() * 10 + 5,
-    color: colors[Math.floor(Math.random() * colors.length)],
-    shape: shapes[Math.floor(Math.random() * shapes.length)],
-    speed: Math.random() * 2 + 0.5,
-    wobble: Math.random() * 0.05,
-    wobblePos: Math.random() * Math.PI * 2,
-    rotation: Math.random() * Math.PI * 2,
-    rotSpeed: (Math.random() - 0.5) * 0.1,
-    opacity: Math.random() * 0.6 + 0.3,
-  }));
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  function drawPiece(p) {
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rotation);
-    ctx.globalAlpha = p.opacity;
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    if (p.shape === 'circle') {
-      ctx.arc(0, 0, p.size/2, 0, Math.PI*2);
-    } else if (p.shape === 'rect') {
-      ctx.rect(-p.size/2, -p.size/4, p.size, p.size/2);
-    } else {
-      ctx.moveTo(0, -p.size/2);
-      ctx.lineTo(p.size/2, p.size/2);
-      ctx.lineTo(-p.size/2, p.size/2);
-      ctx.closePath();
-    }
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function animateConfetti() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    pieces.forEach(p => {
-      p.wobblePos += p.wobble;
-      p.x += Math.sin(p.wobblePos) * 1.5;
-      p.y += p.speed;
-      p.rotation += p.rotSpeed;
-      if (p.y > canvas.height + 20) {
-        p.y = -20;
-        p.x = Math.random() * canvas.width;
-      }
-      drawPiece(p);
+// Staggered children
+const cardObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const cards = e.target.querySelectorAll('.service-card,.theme-card,.testi-card,.step');
+    cards.forEach((c,i) => {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(22px)';
+      c.style.transition = `opacity 0.5s ease ${i*0.09}s, transform 0.5s ease ${i*0.09}s, background 0.25s, border-color 0.2s, outline-color 0.2s, box-shadow 0.2s`;
+      setTimeout(() => { c.style.opacity='1'; c.style.transform='translateY(0)'; }, 60);
     });
-    requestAnimationFrame(animateConfetti);
-  }
-  animateConfetti();
-
-  // ── MARQUEE ──
-  const items = ['🎉 Birthday Parties','🥂 Engagements','🎓 Graduations','🎃 Holiday Bashes','🍼 Baby Showers','🏢 Corporate Events','🌸 Garden Parties','🎊 Surprise Parties'];
-  const track = document.getElementById('marquee-track');
-  const doubled = [...items, ...items];
-  doubled.forEach(txt => {
-    const el = document.createElement('span');
-    el.className = 'marquee-item';
-    el.innerHTML = `<span>${txt}</span>✦`;
-    track.appendChild(el);
   });
-
-  // ── SCROLL FADE-IN ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.service-card, .step, .theme-card, .testi-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s, border-color 0.25s';
-    observer.observe(el);
-  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.services-grid,.themes-grid,.testi-grid,.steps').forEach(el => cardObserver.observe(el));
 </script>
 </body>
 </html>
