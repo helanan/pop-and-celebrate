@@ -615,6 +615,63 @@ footer p { font-size:0.7rem; font-weight:700; color:rgba(234,220,200,0.22); lett
 .shop-note p { font-size: 0.9rem; font-weight: 700; color: var(--brown-md); line-height: 1.7; }
 .shop-note strong { color: var(--red); }
 
+
+/* ── GAME PROMO BAND ── */
+#game-promo {
+  padding: 70px 60px;
+  background: var(--blue);
+  position: relative; overflow: hidden;
+}
+#game-promo::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,252,245,0.12) 2px, transparent 2px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+.gp-inner {
+  position: relative; z-index: 2;
+  max-width: 1000px; margin: 0 auto;
+  display: flex; align-items: center; gap: 40px;
+  flex-wrap: wrap; justify-content: center;
+}
+.gp-emoji {
+  font-size: 4.5rem; line-height: 1; flex-shrink: 0;
+  animation: gentle-float 4s ease-in-out infinite;
+}
+.gp-text { flex: 1; min-width: 260px; }
+.gp-pill {
+  display: inline-block; background: var(--gold); color: var(--brown);
+  font-weight: 900; font-size: 0.68rem; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 100px;
+  margin-bottom: 12px;
+}
+.gp-title {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.1;
+  color: var(--white); margin-bottom: 8px;
+}
+.gp-title em { font-style: italic; color: var(--gold-lt); }
+.gp-desc {
+  font-size: 0.98rem; font-weight: 600; line-height: 1.65;
+  color: rgba(255,252,245,0.78); max-width: 440px;
+}
+.gp-btn {
+  flex-shrink: 0;
+  background: var(--white); color: var(--blue-dk);
+  font-weight: 900; font-size: 0.95rem;
+  padding: 17px 38px; border-radius: 100px;
+  text-decoration: none; display: inline-block;
+  box-shadow: 4px 4px 0 var(--gold);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gp-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 7px 0 var(--gold); }
+@media(max-width:768px){
+  #game-promo { padding: 50px 24px; }
+  .gp-inner { flex-direction: column; text-align: center; }
+  .gp-desc { margin: 0 auto; }
+}
+
 </style>
 </head>
 <body>
@@ -627,6 +684,7 @@ footer p { font-size:0.7rem; font-weight:700; color:rgba(234,220,200,0.22); lett
     <ul>
       <li><a href="#services">What We Do</a></li>
       <li><a href="#process">How It Works</a></li>
+      <li><a href="game.html">Party Game</a></li>
       <li><a href="#shop">Shop</a></li>
       <li><a href="#testimonials">Happy Families</a></li>
       <li><a href="#cta" class="nav-btn">Let's Party! 🎈</a></li>
@@ -836,8 +894,29 @@ footer p { font-size:0.7rem; font-weight:700; color:rgba(234,220,200,0.22); lett
 </section>
 
 
-<!-- WAVE into shop -->
+
+<!-- WAVE into game promo -->
 <div class="wave-wrap" style="background:var(--parchment);margin-bottom:-1px;">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" height="70">
+    <path d="M0,45 C360,0 1080,70 1440,25 L1440,70 L0,70 Z" fill="#7A90C8"/>
+  </svg>
+</div>
+
+<!-- ── GAME PROMO ── -->
+<section id="game-promo">
+  <div class="gp-inner">
+    <div class="gp-emoji">🎲</div>
+    <div class="gp-text">
+      <span class="gp-pill">✿ Free · No signup</span>
+      <h2 class="gp-title">Play the <em>Paris Party Game!</em></h2>
+      <p class="gp-desc">Three quick rounds of French treats, Paris trivia and silly questions — perfect for keeping little guests giggling while the cake comes out.</p>
+    </div>
+    <a href="game.html" class="gp-btn">Play now →</a>
+  </div>
+</section>
+
+<!-- WAVE into shop -->
+<div class="wave-wrap" style="background:#7A90C8;margin-bottom:-1px;">
   <svg viewBox="0 0 1440 70" preserveAspectRatio="none" height="70">
     <path d="M0,20 C480,70 960,0 1440,50 L1440,70 L0,70 Z" fill="#FAF4E8"/>
   </svg>
@@ -1049,6 +1128,7 @@ footer p { font-size:0.7rem; font-weight:700; color:rgba(234,220,200,0.22); lett
   <ul class="footer-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#process">How It Works</a></li>
+    <li><a href="game.html">Party Game</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="mailto:bonjour@lafeteparties.com">Say Bonjour!</a></li>
   </ul>
